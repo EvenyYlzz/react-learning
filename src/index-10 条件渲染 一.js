@@ -28,33 +28,20 @@ class ParentCom extends React.Component{
     super(props)
 
     this.state = {
-      isLogin: false
+      isLogin: true
     }
     
   }
 
   render(){
-    let element = null
-
     if (this.state.isLogin) {
-      element = <UserGreet />
+      return (<UserGreet />)
     } else {
-      element = <UserLogin />
+      return (<UserLogin />)
     }
-
-    return (
-      <div>
-        <h1>这是头部</h1>
-        {element}
-        <hr/>
-        <h1>这是三元运算符操作</h1>
-        {this.state.isLogin?<UserGreet />:<UserLogin />}
-        <h1>这是尾部</h1>
-      </div>
-    )
   }
 }
-//  ---------------------------------------以上为第二种
+//  ---------------------------------------以上为第一种
 
 ReactDOM.render(
   <ParentCom />,
