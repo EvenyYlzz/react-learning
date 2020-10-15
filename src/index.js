@@ -5,9 +5,38 @@ import ReactDOM from 'react-dom';
 //  将列表内容拼装成数组放置到模板中
 //  将数据拼装成数组的 JSX 对象
 
-let arr = ["小红","小象","小象红"]
+function ListItem(props) {
+  return (
+    <li>
+      <h3>{props.index}:{props.data.title}</h3>
+      <p>{props.data.content}</p>
+    </li>
+  )
+}
 
-let arrHTML = [<li>小红</li>,<li>小象</li>,<li>小象红</li>]
+class ListItem2 extends React.Component{
+  constructor(props) {
+    super(props)
+    
+  }
+
+  render() {
+    return (
+      <li onClick={(event)=>{this.clickEvent(
+        this.props.index,
+        this.props.data.title,
+        event
+        )}}>
+        <h3>{this.props.index}:{this.props.data.title}</h3>
+        <p>{this.props.data.content}</p>
+    </li>
+    )
+  }
+
+  clickEvent=(index,title,event)=>{
+    alert(index+'————'+title)
+  }
+}
 
 class Welcome extends React.Component{
   constructor(props){
@@ -30,18 +59,17 @@ class Welcome extends React.Component{
       ]
     }
   }
-
   render() {
-    let listArr = []
-    for(let i = 0 ; i<this.state.list.length ; i++) {
-      let item = (
-        <li>
-          <h3>{this.state.list[i].title}</h3>
-          <p>{this.state.list[i].content}</p>
-        </li>
+    let listArr = this.state.list.map( (item,index) => {
+      return (
+        //  key值要放对
+        <ListItem2 key={index} data={item} index={index}></ListItem2>
       )
-      listArr.push(item)
-    }
+    })
+
+    //  使用数组的map方法，对每一项数据按照 JSX 的形式进行加工，最终得到一个每一项都是 JSX 对象的数组，再将数组渲染到模板中
+
+    //  key值需要放置到每一项中
 
     return (
       <div>
@@ -55,8 +83,23 @@ class Welcome extends React.Component{
             </li>
           </ul>
 
+          <h1>复杂没有用组件列表</h1>
+          {
+            this.state.list.map( (item,index) => {
+              return (
+                <li key={index} onClick={(event)=>{this.clickFn(index,item.title,event)}}>
+                  <h3>{item.title}</h3>
+                  <p>{item.content}</p>
+                </li>
+              )
+            })
+          }
       </div>
     )
+  }
+
+  clickFn=(index,title,event)=>{
+    alert(index+'————'+title)
   }
 }
 
