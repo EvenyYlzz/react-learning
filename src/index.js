@@ -6,6 +6,7 @@ import {Provider,connect} from 'react-redux'
 //  安装react-redux
 //  npm install react-redux --save
 
+//  测试
 
 //  使用：
 //  ①初始化数据，实例化store等到数据仓库
